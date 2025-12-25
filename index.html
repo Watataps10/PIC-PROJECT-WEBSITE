@@ -1,1 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indigenous Peoples of the Philippines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        :root {
+            --primary: #2a6e3f;
+            --secondary: #d4af37;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --accent: #8b4513;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(to right, var(--primary), #1e4d2b);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1593693399741-1c5ac74dda74?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 10rem 0 5rem;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+
+        /* Main Content */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 10px auto;
+        }
+
+        /* Introduction */
+        .intro {
+            background-color: white;
+        }
+
+        .intro-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .intro-text {
+            flex: 1;
+        }
+
+        .intro-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Tribes Section */
+        .tribes {
+            background-color: #f0f7f2;
+        }
+
+        .tribe-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background-color: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .tribe-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tribe-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .tribe-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .tribe-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .tribe-info {
+            padding: 1.5rem;
+        }
+
+        .tribe-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tribe-info .location {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tribe-info .location i {
+            margin-right: 5px;
+        }
+
+        /* Culture Section */
+        .culture {
+            background-color: white;
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .culture-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            transition: all 0.3s;
+        }
+
+        .culture-item:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .culture-item:hover h3,
+        .culture-item:hover p {
+            color: white;
+        }
+
+        .culture-item i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .culture-item h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .culture-item p {
+            color: #666;
+        }
+
+        /* Interactive Map */
+        .map-section {
+            background-color: #f0f7f2;
+            padding: 5rem 0;
+        }
+
+        .map-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #e6f2e9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .ph-map {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .map-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .map-point:hover {
+            background-color: var(--primary);
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        .map-tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            z-index: 10;
+            display: none;
+        }
+
+        /* Support Section */
+        .support {
+            background-color: white;
+            text-align: center;
+        }
+
+        .support-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .support-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            width: 300px;
+            transition: all 0.3s;
+        }
+
+        .support-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .support-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .intro-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: var(--primary);
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 1rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Katutubong Filipino</span>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#tribes">Indigenous Tribes</a></li>
+                    <li><a href="#culture">Culture</a></li>
+                    <li><a href="#map">Geographic Map</a></li>
+                    <li><a href="#support">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Indigenous Peoples of the Philippines</h1>
+            <p>Celebrating the rich cultural heritage, traditions, and resilience of the Katutubo - the original inhabitants of the Philippine archipelago.</p>
+            <a href="#tribes" class="cta-button">Explore Indigenous Tribes</a>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro">
+        <div class="container">
+            <h2 class="section-title">About Indigenous Filipinos</h2>
+            <div class="intro-content">
+                <div class="intro-text">
+                    <p>The Philippines is home to over 110 indigenous ethnolinguistic groups, comprising about 15% of the total population. These communities have preserved distinct cultures, traditions, and knowledge systems for thousands of years.</p>
+                    <br>
+                    <p>Collectively known as Katutubo, they inhabit the mountainous regions, forests, and coastal areas across the archipelago. Each group possesses unique languages, spiritual beliefs, arts, and sustainable ways of living in harmony with nature.</p>
+                    <br>
+                    <p>Despite facing challenges such as displacement and cultural erosion, indigenous Filipinos continue to uphold their ancestral heritage while contributing to the nation's cultural diversity.</p>
+                </div>
+                <div class="intro-image">
+                    <!-- Image of indigenous Filipino weaver -->
+                    <img src="https://b4081481.smushcdn.com/4081481/wp-content/uploads/2023/04/Vogue-Philippines_April_2023_Cover1-scaled.jpg?lossy=2&strip=1&webp=1" alt="Indigenous Filipino weaver">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tribes Section -->
+    <section class="tribes" id="tribes">
+        <div class="container">
+            <h2 class="section-title">Major Indigenous Tribes</h2>
+            
+            <div class="tribe-filter">
+                <button class="filter-btn active" data-filter="all">All Tribes</button>
+                <button class="filter-btn" data-filter="luzon">Luzon</button>
+                <button class="filter-btn" data-filter="visayas">Visayas</button>
+                <button class="filter-btn" data-filter="mindanao">Mindanao</button>
+            </div>
+            
+            <div class="tribe-cards">
+                <!-- Tribe cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section class="culture" id="culture">
+        <div class="container">
+            <h2 class="section-title">Cultural Heritage</h2>
+            
+            <div class="culture-grid">
+                <div class="culture-item">
+                    <i class="fas fa-hands"></i>
+                    <h3>Traditional Crafts</h3>
+                    <p>Intricate weaving, pottery, wood carving, and jewelry making using sustainable materials and ancient techniques.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <i class="fas fa-music"></i>
+                    <h3>Music & Dance</h3>
+                    <p>Unique musical instruments, chants, and dances that tell stories of nature, ancestors, and daily life.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Sustainable Living</h3>
+                    <p>Traditional ecological knowledge for sustainable agriculture, forest management, and natural resource conservation.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <i class="fas fa-book"></i>
+                    <h3>Oral Traditions</h3>
+                    <p>Rich oral literature including epics, myths, legends, and proverbs passed down through generations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section class="map-section" id="map">
+        <div class="container">
+            <h2 class="section-title">Indigenous Communities Map</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Click on the markers to learn about indigenous groups in different regions of the Philippines.</p>
+            
+            <div class="map-container">
+                <img src= "https://thumbs.dreamstime.com/b/map-administrative-division-philippines-pastel-colored-flat-provinces-regions-asian-country-193709158.jpg" alt="Philippines Map" class="ph-map">
+                
+                <!-- Map points will be added by JavaScript -->
+                
+                <div class="map-tooltip" id="mapTooltip"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support" id="support">
+        <div class="container">
+            <h2 class="section-title">How You Can Support</h2>
+            <p>Indigenous communities face challenges including land rights issues, cultural erosion, and economic marginalization. Here's how you can help:</p>
+            
+            <div class="support-options">
+                <div class="support-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Ethical Tourism</h3>
+                    <p>Visit indigenous communities responsibly, respecting their culture and traditions while supporting their livelihoods.</p>
+                </div>
+                
+                <div class="support-card">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>Buy Authentic Crafts</h3>
+                    <p>Purchase directly from indigenous artisans to support their traditional crafts and ensure fair compensation.</p>
+                </div>
+                
+                <div class="support-card">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Advocate & Educate</h3>
+                    <p>Raise awareness about indigenous rights and issues. Share accurate information and challenge stereotypes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Katutubong Filipino</h3>
+                    <p>Dedicated to promoting awareness and appreciation of the indigenous peoples of the Philippines.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#tribes">Indigenous Tribes</a></li>
+                        <li><a href="#culture">Cultural Heritage</a></li>
+                        <li><a href="#map">Geographic Map</a></li>
+                        <li><a href="#support">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Indigenous Rights</a></li>
+                        <li><a href="#">Cultural Preservation</a></li>
+                        <li><a href="#">Educational Materials</a></li>
+                        <li><a href="#">Documentary Films</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Katutubong Filipino. This website is for educational purposes only. All rights reserved.</p>
+                <p>Images from Unsplash and Wikimedia Commons.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Tribe data with corrected names and appropriate images
+        const tribes = [
+            {
+                name: "Igorot",
+                location: "Cordillera Region, Luzon",
+                description: "Collective term for several ethnic groups in the Cordillera mountains known for their rice terraces, weaving, and metalwork. The Ifugao rice terraces are a UNESCO World Heritage site.",
+                image: "https://katutuboproject.org/wp-content/uploads/2014/09/Ifugao_2065_021.jpg",
+                region: "luzon"
+            },
+            {
+                name: "Lumad",
+                location: "Mindanao",
+                description: "A collective term for non-Muslim indigenous peoples of Mindanao, comprising about 18 ethnolinguistic groups including the T'boli, Manobo, and Subanen.",
+                image: "http://mindanews.com/wp-content/uploads/06kaamulanfile.jpg",
+                region: "mindanao"
+            },
+            {
+                name: "Mangyan",
+                location: "Mindoro Island",
+                description: "Eight indigenous groups inhabiting Mindoro island, known for their ancient script called Surat Mangyan, ambahan poetry, and intricate beadwork.",
+                image: "https://img1.wsimg.com/isteam/ip/c1d4b758-0459-46b5-b1a8-b43d2df21249/Mangyan%20welcome.jpg",
+                region: "luzon"
+            },
+            {
+                name: "Aeta",
+                location: "Zambales, Pampanga, Bataan",
+                description: "One of the earliest inhabitants of the Philippines, known for their adaptation to tropical rainforests, hunting-gathering lifestyle, and traditional healing practices.",
+                image: "https://www.bataan.gov.ph/wp-content/uploads/2021/09/aeta-communities.jpg",
+                region: "luzon"
+            },
+            {
+                name: "Badjao",
+                location: "Sulu Archipelago, Coastal Mindanao",
+                description: "Known as 'Sea Gypsies' for their maritime lifestyle, exceptional free-diving abilities, and boat-dwelling traditions. They're renowned for their sea navigation skills.",
+                image: "https://i2-prod.mirror.co.uk/incoming/article5615354.ece/ALTERNATES/s1227b/PAY-The-Bajau-people.jpg",
+                region: "mindanao"
+            },
+            {
+                name: "Ifugao",
+                location: "Ifugao Province, Cordillera",
+                description: "Famous for creating the Banaue Rice Terraces, considered a UNESCO World Heritage Site and the 'Eighth Wonder of the World'. Known for their intricate woodcarving.",
+                image: "https://www.sapiens.org/app/uploads/2020/08/01_Ifugao-Intangibleheritage-Arts-Society.jpg",
+                region: "luzon"
+            },
+            {
+                name: "T'boli",
+                location: "South Cotabato, Mindanao",
+                description: "Known as the 'Dream Weavers' for their T'nalak cloth made from abaca fibers, which they believe is inspired by dreams. Also famous for their brass casting and embroidery.",
+                image: "https://2.bp.blogspot.com/-y_uFa44ds8M/Va4lshbTZ0I/AAAAAAAATFA/N0CFcqVxbww/s1600/13.png",
+                region: "mindanao"
+            },
+            {
+                name: "Ati",
+                location: "Panay Island, Negros",
+                description: "One of the earliest inhabitants of the Visayas, known for their dark skin, curly hair, and traditional healing knowledge. They have a rich tradition of dance and music.",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLaNBI9mrYZ21jxLdEqkMBwgn7VzOkR3CqfQ&s",
+                region: "visayas"
+            }
+        ];
+        
+        // Render tribe cards
+        const tribeCardsContainer = document.querySelector('.tribe-cards');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        function renderTribeCards(filter = 'all') {
+            tribeCardsContainer.innerHTML = '';
+            
+            const filteredTribes = filter === 'all' 
+                ? tribes 
+                : tribes.filter(tribe => tribe.region === filter);
+            
+            filteredTribes.forEach(tribe => {
+                const card = document.createElement('div');
+                card.className = 'tribe-card';
+                card.setAttribute('data-region', tribe.region);
+                
+                card.innerHTML = `
+                    <img src="${tribe.image}" alt="${tribe.name}">
+                    <div class="tribe-info">
+                        <h3>${tribe.name}</h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${tribe.location}
+                        </div>
+                        <p>${tribe.description}</p>
+                    </div>
+                `;
+                
+                tribeCardsContainer.appendChild(card);
+            });
+        }
+        
+        // Initialize tribe cards
+        renderTribeCards();
+        
+        // Add event listeners to filter buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Filter tribe cards
+                const filter = button.getAttribute('data-filter');
+                renderTribeCards(filter);
+            });
+        });
+        
+        // Interactive map functionality
+        const mapContainer = document.querySelector('.map-container');
+        const mapTooltip = document.getElementById('mapTooltip');
+        
+        // Map points data (positions are approximate percentages of the map dimensions)
+        const mapPoints = [
+            { left: '30%', top: '25%', tribe: 'Igorot', region: 'Cordillera, Luzon' },
+            { left: '25%', top: '50%', tribe: 'Mangyan', region: 'Mindoro Island' },
+            { left: '20%', top: '60%', tribe: 'Aeta', region: 'Zambales, Luzon' },
+            { left: '40%', top: '50%', tribe: 'Ati', region: 'Panay Island' },
+            { left: '60%', top: '70%', tribe: 'Lumad', region: 'Mindanao' },
+            { left: '70%', top: '60%', tribe: 'T\'boli', region: 'South Cotabato' },
+            { left: '75%', top: '50%', tribe: 'Badjao', region: 'Sulu Archipelago' },
+            { left: '32%', top: '30%', tribe: 'Ifugao', region: 'Ifugao Province' }
+        ];
+        
+        // Create map points
+        mapPoints.forEach(point => {
+            const mapPoint = document.createElement('div');
+            mapPoint.className = 'map-point';
+            mapPoint.style.left = point.left;
+            mapPoint.style.top = point.top;
+            
+            mapPoint.addEventListener('mouseenter', (e) => {
+                const rect = mapContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                mapTooltip.innerHTML = `<strong>${point.tribe}</strong><br>${point.region}`;
+                mapTooltip.style.left = `${x + 15}px`;
+                mapTooltip.style.top = `${y + 15}px`;
+                mapTooltip.style.display = 'block';
+            });
+            
+            mapPoint.addEventListener('mouseleave', () => {
+                mapTooltip.style.display = 'none';
+            });
+            
+            mapPoint.addEventListener('click', () => {
+                // Scroll to tribes section and filter to show the selected tribe
+                document.querySelector('#tribes').scrollIntoView({ behavior: 'smooth' });
+                
+                // Find the tribe in the data and filter to show it
+                const tribeName = point.tribe.toLowerCase();
+                const tribeData = tribes.find(t => t.name.toLowerCase().includes(tribeName));
+                
+                if (tribeData) {
+                    // Update filter buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.getAttribute('data-filter') === tribeData.region) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    
+                    // Filter and scroll to the tribe
+                    renderTribeCards(tribeData.region);
+                    
+                    // Small delay to allow cards to render before scrolling
+                    setTimeout(() => {
+                        const tribeCards = document.querySelectorAll('.tribe-card');
+                        tribeCards.forEach(card => {
+                            if (card.querySelector('h3').textContent.toLowerCase() === tribeName) {
+                                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                card.style.boxShadow = '0 0 0 3px var(--secondary)';
+                                setTimeout(() => {
+                                    card.style.boxShadow = '';
+                                }, 3000);
+                            }
+                        });
+                    }, 300);
+                }
+            });
+            
+            mapContainer.appendChild(mapPoint);
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add active class to nav links based on scroll position
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + 100;
+            
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    document.querySelectorAll('#navMenu a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Initialize with active nav link
+        document.querySelector('#navMenu a[href="#home"]').classList.add('active');
+    </script>
+</body>
+</html>
